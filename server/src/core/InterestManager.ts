@@ -21,7 +21,7 @@ export class InterestManager {
         return `${cx},${cz}`;
     }
 
-    public updateVisibility(player: Player, allEntitiesMap: Map<string, any>): { 
+    public updateVisibility(player: Player, allPlayersMap: Map<string, any>, allEnemiesMap: Map<string, any>): {
         newVisible: any[], 
         newHidden: string[] 
     } {
@@ -54,7 +54,7 @@ export class InterestManager {
 
                 for (const otherId of cellEntities) {
                     if (otherId === playerId) continue;
-                    const other = allEntitiesMap.get(otherId);
+                    const other = allPlayersMap.get(otherId) || allEnemiesMap.get(otherId);
                     if (!other) continue;
 
                     const dx = player.position.x - other.position.x;

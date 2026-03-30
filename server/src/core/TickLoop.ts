@@ -31,11 +31,6 @@ export class TickLoop {
         const allEnemiesMap = this.gameManager.getEnemiesMap();
         const allPlayers = Array.from(allPlayersMap.values());
         const allEnemies = Array.from(allEnemiesMap.values());
-        
-        // Tüm varlıkları hızlı erişim için Map'e al
-        const allEntitiesMap = new Map<string, any>();
-        allPlayers.forEach(p => allEntitiesMap.set(p.id, p));
-        allEnemies.forEach(e => allEntitiesMap.set(e.id, e));
 
         // --- REJENERASYON DÖNGÜSÜ (Her 1 saniyede bir) ---
         if (now - this.lastRegenTime >= 1000) {
@@ -46,7 +41,7 @@ export class TickLoop {
 
         for (const player of allPlayers) {
             // 1. Görüş Alanı (AOI) Güncellemesi (PRO Grid System)
-            const { newVisible, newHidden } = this.interestManager.updateVisibility(player, allEntitiesMap);
+            const { newVisible, newHidden } = this.interestManager.updateVisibility(player, allPlayersMap, allEnemiesMap);
 
             // 2. Yeni Girenlere JOIN Paketleri
             if (newVisible.length > 0) {
