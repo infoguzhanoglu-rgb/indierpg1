@@ -1,0 +1,14 @@
+
+> server@1.0.0 dev
+> tsx watch src/index.ts
+
+[GameManager] Saman Spawn Edildi: saman_100 (NetID: 100)
+[GameManager] Saman Spawn Edildi: saman_101 (NetID: 101)
+[GameManager] Saman Spawn Edildi: saman_102 (NetID: 102)
+[GameManager] Saman Spawn Edildi: saman_103 (NetID: 103)
+[GameManager] Saman Spawn Edildi: saman_104 (NetID: 104)
+[GameManager] Saman Spawn Edildi: saman_105 (NetID: 105)
+[GameManager] Saman Spawn Edildi: saman_106 (NetID: 106)
+[GameManager] Saman Spawn Edildi: saman_107 (NetID: 107)
+Symge Online Sunucu Motoru Hazır (Tick Loop Aktif)!
+[Sunucu] WebSocket dinlemeye başladı (Port: 3000)

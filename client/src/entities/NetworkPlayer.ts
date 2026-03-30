@@ -185,7 +185,8 @@ export class NetworkPlayer extends BaseEntity {
             }
 
             if (found) {
-                const t = (renderTime - s0.t) / (s1.t - s0.t);
+                const timeDiff = s1.t - s0.t;
+                const t = timeDiff > 0 ? (renderTime - s0.t) / timeDiff : 1;
                 this.mesh.position.lerpVectors(s0.p, s1.p, t);
                 
                 // Rotasyon Interpolation (En kısa yönden dönme)

@@ -21,18 +21,18 @@ export class InterestManager {
         return `${cx},${cz}`;
     }
 
-    public updateVisibility(player: Player, allEntitiesMap: Map<string, any>): { 
+    public updateVisibility(entity: any, allEntitiesMap: Map<string, any>): {
         newVisible: any[], 
         newHidden: string[] 
     } {
-        const playerId = player.id;
+        const playerId = entity.id;
         const currentVisible = this.visibleToPlayer.get(playerId) || new Set<string>();
         const nextVisible = new Set<string>();
         const newVisibleEntities: any[] = [];
         const newHiddenIds: string[] = [];
 
         // 1. Grid Güncelleme
-        const newCellKey = this.getCellKey(player.position.x, player.position.z);
+        const newCellKey = this.getCellKey(entity.position.x, entity.position.z);
         const oldCellKey = this.playerToCell.get(playerId);
         
         if (oldCellKey !== newCellKey) {
@@ -43,8 +43,8 @@ export class InterestManager {
         }
 
         // 2. Komşu 9 hücreyi tara (Optimized Scanning)
-        const cx = Math.floor(player.position.x / this.CELL_SIZE);
-        const cz = Math.floor(player.position.z / this.CELL_SIZE);
+        const cx = Math.floor(entity.position.x / this.CELL_SIZE);
+        const cz = Math.floor(entity.position.z / this.CELL_SIZE);
 
         for (let ix = cx - 1; ix <= cx + 1; ix++) {
             for (let iz = cz - 1; iz <= cz + 1; iz++) {
@@ -57,8 +57,8 @@ export class InterestManager {
                     const other = allEntitiesMap.get(otherId);
                     if (!other) continue;
 
-                    const dx = player.position.x - other.position.x;
-                    const dz = player.position.z - other.position.z;
+                    const dx = entity.position.x - other.position.x;
+                    const dz = entity.position.z - other.position.z;
                     if ((dx * dx + dz * dz) <= this.VIEW_DISTANCE_SQ) {
                         nextVisible.add(otherId);
                         if (!currentVisible.has(otherId)) newVisibleEntities.push(other);
@@ -87,13 +87,13 @@ export class InterestManager {
         }
     }
 
-    public getVisiblePlayers(playerId: string, allPlayersMap: Map<string, Player>): Player[] {
+    public getVisibleEntities(playerId: string, allEntitiesMap: Map<string, any>): any[] {
         const visibleIds = this.visibleToPlayer.get(playerId);
         if (!visibleIds) return [];
         const results = [];
         for (const id of visibleIds) {
-            const p = allPlayersMap.get(id);
-            if (p) results.push(p);
+            const entity = allEntitiesMap.get(id);
+            if (entity) results.push(entity);
         }
         return results;
     }

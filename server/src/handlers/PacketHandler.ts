@@ -99,7 +99,7 @@ export function handleIncomingPacket(
                             // Hasarı dinamik süre sonra UYGULA (Cast Gecikmesi 650ms + Yol Süresi)
                             const totalDelay = 650 + travelDelay;
 
-                            setTimeout(() => {
+                            gameManager.enqueueCombatAction(totalDelay, () => {
                                 target.takeDamage(finalDamage, caster.id, caster.username);
                                 console.log(`[Combat-Delay] Hasar uygulandı (${Math.round(distance)}m): ${finalDamage}`);
 
@@ -110,7 +110,7 @@ export function handleIncomingPacket(
                                     gameManager.getPlayersMap().size
                                 );
                                 gameManager.broadcastChat(targetState);
-                            }, totalDelay);
+                            });
 
                             caster.send(BinaryCoder.encodeFullStats(caster.attributes, caster.derived, caster.hp, caster.mp));
                         } else {
