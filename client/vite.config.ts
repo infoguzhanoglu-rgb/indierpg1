@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import { defineConfig } from 'vite';
 
 export default defineConfig({
@@ -6,5 +7,9 @@ export default defineConfig({
       // Üst dizindeki 'shared' klasörüne erişim izni veriyoruz
       allow: ['..']
     }
+  },
+  test: {
+    environment: 'jsdom',
+    globals: true,
   }
 });
