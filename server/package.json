@@ -9,8 +9,10 @@
   "devDependencies": {
     "@types/node": "^20.11.24",
     "@types/ws": "^8.18.1",
+    "@vitest/coverage-v8": "^4.1.2",
     "tsx": "^4.7.1",
-    "typescript": "^5.4.2"
+    "typescript": "^5.4.2",
+    "vitest": "^4.1.2"
   },
   "dependencies": {
     "ws": "^8.20.0"
