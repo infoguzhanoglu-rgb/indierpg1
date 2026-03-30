@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MMORPG Client</title>
+    <style>
+      body {
+        margin: 0;
+        overflow: hidden;
+        background-color: #000;
+        font-family: 'Outfit', sans-serif;
+      }
+      #app {
+        width: 100vw;
+        height: 100vh;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Login Screen UI -->
+    <div id="loginOverlay">
+        <div class="login-box">
+            <h1>MMORPG</h1>
+            <input type="text" id="usernameInput" placeholder="Kullanıcı Adı (İsteğe Bağlı)" />
+            <button id="btnGuestLgn">Misafir Olarak Katıl</button>
+            <p id="connStatus" style="font-size: 12px; color: #888; text-align: center; margin-top: 10px;">Sunucuya bağlanıyor...</p>
+        </div>
+    </div>
+
+    <!-- 3D Game App -->
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

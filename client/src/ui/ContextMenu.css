@@ -1,0 +1,41 @@
+.context-menu {
+    position: fixed !important; /* Ekran üzerinde sabit kalsın */
+    padding: 0;
+    z-index: 10000 !important; /* En üst katman */
+    min-width: 150px;
+    user-select: none;
+    overflow: hidden;
+    display: none; /* Başlangıçta gizli */
+}
+
+.context-menu-header {
+    padding: 8px 15px;
+    font-weight: bold;
+    color: #4db8ff;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.context-menu-item {
+    padding: 10px 15px;
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+    background: transparent;
+}
+
+.context-menu-item:last-child {
+    border-bottom: none;
+}
+
+.context-menu-item:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    color: #4db8ff;
+}

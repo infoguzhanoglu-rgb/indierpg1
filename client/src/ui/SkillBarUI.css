@@ -1,0 +1,206 @@
+/* Master UI Language - Global Standard */
+.ui-master-panel {
+    background: rgba(0, 0, 0, 0.45) !important;
+    backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border-radius: 4px !important;
+    box-shadow: none !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+}
+
+.ui-sub-panel {
+    background: rgba(0, 0, 0, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    border-radius: 2px !important;
+    box-shadow: none !important;
+}
+
+/* Skill Bar Container */
+.skill-bar-container {
+    position: absolute;
+    bottom: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 10px;
+    z-index: 500;
+    pointer-events: auto;
+    user-select: none;
+    min-width: 440px;
+}
+
+/* Header Area: XP ve SP */
+.sb-header {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    width: 100%;
+}
+
+.xp-bar-container {
+    flex: 1;
+    height: 14px;
+    position: relative;
+    overflow: hidden;
+}
+
+.xp-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #2e7d32, #4caf50);
+    transition: width 0.3s ease-out;
+}
+
+.xp-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 9px;
+    color: white;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px black;
+    pointer-events: none;
+    white-space: nowrap;
+}
+
+.skill-points-box {
+    min-width: 55px;
+    height: 14px;
+    color: rgba(255, 255, 255, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+.skill-points-box.has-points {
+    color: #ffd700;
+    border-color: rgba(255, 215, 0, 0.3) !important;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+}
+
+/* Slots Wrapper */
+.skill-slots-wrapper {
+    display: flex;
+    gap: 7px;
+    justify-content: center;
+    width: 100%;
+}
+
+.skill-slot {
+    width: 41px;
+    height: 41px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; 
+}
+
+.skill-slot:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
+    border-color: rgba(77, 184, 255, 0.5) !important;
+}
+
+.skill-slot.active {
+    transform: scale(0.95);
+    background: rgba(77, 184, 255, 0.2) !important;
+    border-color: #4db8ff !important;
+}
+
+.skill-key {
+    position: absolute;
+    bottom: 1px;
+    right: 3px;
+    font-size: 9px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: bold;
+    pointer-events: none;
+    z-index: 10;
+    text-shadow: 1px 1px 2px black;
+}
+
+.skill-icon {
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.01);
+    border-radius: 1px;
+    pointer-events: none;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+
+/* COOLDOWN SYSTEM */
+.skill-cooldown-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: none;
+    z-index: 5;
+}
+
+.skill-cooldown-timer {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 14px;
+    font-weight: bold;
+    color: #ff4d4d;
+    text-shadow: 0 0 5px black;
+    z-index: 6;
+    display: none;
+}
+
+.skill-slot.on-cooldown {
+    cursor: default;
+    pointer-events: none;
+}
+
+.skill-slot.on-cooldown .skill-cooldown-overlay,
+.skill-slot.on-cooldown .skill-cooldown-timer {
+    display: block;
+}
+
+/* Tooltip / Hover (SkillsUI.css ile aynı) */
+.skill-tooltip {
+    position: fixed;
+    z-index: 3000;
+    width: 200px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid #4db8ff;
+    border-radius: 4px;
+    padding: 10px;
+    pointer-events: none;
+    display: none;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.tooltip-name {
+    color: #ffd700;
+    font-weight: bold;
+    font-size: 13px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+    padding-bottom: 3px;
+}
+
+.tooltip-desc {
+    color: #eee;
+    font-size: 11px;
+    line-height: 1.4;
+}

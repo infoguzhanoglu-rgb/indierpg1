@@ -1,0 +1,37 @@
+.target-interaction-container {
+    position: absolute;
+    top: 10px;
+    /* TargetHUD (50% left + 114px half-width) + 10px mesafe */
+    left: calc(50% + 124px);
+    display: none;
+    padding: 5px;
+    z-index: 100;
+}
+
+.ti-buttons {
+    display: flex;
+    gap: 5px;
+}
+
+.ti-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 2px;
+    font-size: 11px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.ti-btn:hover {
+    background: rgba(77, 184, 255, 0.2);
+    border-color: #4db8ff;
+    color: #4db8ff;
+}
+
+.ti-btn:active {
+    transform: scale(0.95);
+}

@@ -1,0 +1,17 @@
+@font-face {
+    font-family: 'Montserrat-Bold';
+    src: url('/fonts/Montserrat-Bold.ttf') format('truetype');
+}
+
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #000;
+    user-select: none; /* Prevent text selection while rotating camera */
+    font-family: 'Outfit', sans-serif;
+}
+
+#app {
+    width: 100vw;
+    height: 100vh;
+}

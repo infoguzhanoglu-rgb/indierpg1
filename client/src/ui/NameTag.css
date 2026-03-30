@@ -1,0 +1,57 @@
+.nametag {
+    position: absolute;
+    color: #ffffff;
+    background: rgba(0, 0, 0, 0.15); /* Artık tüm isimlikler %15 saydamlıkta (Eşitlendi) */
+    padding: 3px 8px;
+    border-radius: 0;
+    font-size: 13px;
+    font-weight: bold;
+    pointer-events: none;
+    text-shadow: 1px 1px 2px #000;
+    z-index: 10;
+    user-select: none;
+    box-shadow: 0 0 2px rgba(255, 255, 255, 0.1);
+    
+    /* Yumuşak gizlenme/görünme efekti */
+    opacity: 0;
+    transition: opacity 0.4s ease-in-out;
+    
+    /* Titremeyi önleyen en kritik CSS ayarları */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    top: 0;
+    left: 0;
+    will-change: transform, opacity;
+}
+
+.chat-bubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.9);
+    color: #000;
+    padding: 5px 12px;
+    border-radius: 15px;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 200px;
+    word-wrap: break-word;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    z-index: 11;
+    display: none;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+.chat-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid rgba(255, 255, 255, 0.9);
+}

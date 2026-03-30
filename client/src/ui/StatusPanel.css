@@ -1,0 +1,33 @@
+.status-panel-container {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    z-index: 100;
+    pointer-events: none;
+    padding: 4px 12px;
+}
+
+.status-content {
+    display: flex;
+    align-items: center;
+    gap: 8px; /* Öğeler arası boşluk */
+    color: rgba(255, 255, 255, 0.8);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 9px; /* %15 küçültüldü: 10.5px -> 9px */
+    font-weight: bold;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+}
+
+/* Ayırıcı Çizgi Stili (|) */
+.sep {
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: normal;
+    margin: 0 2px;
+}
+
+/* Tüm değerler artık aynı renk (beyaz/gri tonu) sadece önemli durumlar için JS ile renk değişebilir */
+.status-content span {
+    display: flex;
+    align-items: center;
+}

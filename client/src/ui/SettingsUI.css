@@ -1,0 +1,95 @@
+.settings-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    z-index: 2000;
+    pointer-events: auto;
+    overflow: hidden;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+    font-size: 14px;
+    letter-spacing: 1px;
+}
+
+.settings-close-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.settings-close-btn:hover {
+    color: #ff4d4d;
+}
+
+.settings-tabs {
+    display: flex;
+    background: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.settings-tab {
+    padding: 10px 20px;
+    font-size: 12px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.2s;
+    border-bottom: 2px solid transparent;
+}
+
+.settings-tab:hover {
+    color: white;
+}
+
+.settings-tab.active {
+    color: #4db8ff;
+    border-bottom-color: #4db8ff;
+}
+
+.settings-content {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.settings-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.settings-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+.settings-row input[type="range"] {
+    width: 150px;
+    accent-color: #4db8ff;
+    cursor: pointer;
+}
+
+.settings-row input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #4db8ff;
+    cursor: pointer;
+}
