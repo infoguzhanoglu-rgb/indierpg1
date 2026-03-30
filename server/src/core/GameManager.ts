@@ -17,6 +17,7 @@ export class GameManager {
     private currentRainState: boolean = false;
     private lastScheduleState: boolean = false;
     private respawnQueue: { spawnPos: any, type: string, respawnAt: number }[] = [];
+    public combatQueue: { executeAt: number, action: () => void }[] = [];
 
     constructor(network: ServerNetwork) {
         this.network = network;
@@ -46,6 +47,10 @@ export class GameManager {
                 }
             }
         });
+    }
+
+    public enqueueCombatAction(delayMs: number, action: () => void) {
+        this.combatQueue.push({ executeAt: Date.now() + delayMs, action });
     }
 
     private spawnSaman(id: string, position: {x: number, y: number, z: number}) {
@@ -89,7 +94,7 @@ export class GameManager {
             this.network.broadcast(effectPacket);
 
             // 3. HASAR VE STAT GÜNCELLEMESİ (GECİKMELİ - Pro standardı)
-            setTimeout(() => {
+            this.enqueueCombatAction(delayMs, () => {
                 const targetPlayer = this.players.get(targetId);
                 if (!targetPlayer) return;
 
@@ -106,7 +111,7 @@ export class GameManager {
                 targetPlayer.send(BinaryCoder.encodeFullStats(targetPlayer.attributes, targetPlayer.derived, targetPlayer.hp, targetPlayer.mp));
                 const statPacket = BinaryCoder.encodePlayersDynamicList([targetPlayer.toState()], null, this.getElapsedServerTime(), this.players.size);
                 this.network.broadcast(statPacket);
-            }, delayMs);
+            });
         };
 
         this.enemies.set(id, saman);
@@ -166,7 +171,14 @@ export class GameManager {
                 );
                 this.network.broadcast(statePacket);
             }
-            // 4. OYUNCU RESPAWN KONTROLÜ (KALDIRILDI - Artık manuel buton ile yapılıyor)
+            // 4. COMBAT QUEUE GÜNCELLEMESİ
+            for (let i = this.combatQueue.length - 1; i >= 0; i--) {
+                const item = this.combatQueue[i];
+                if (now >= item.executeAt) {
+                    item.action();
+                    this.combatQueue.splice(i, 1);
+                }
+            }
         }, 25);
     }
 

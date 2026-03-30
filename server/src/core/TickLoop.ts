@@ -44,8 +44,13 @@ export class TickLoop {
             this.lastRegenTime = now;
         }
 
+        // 1. Grid Güncellemesi: Tüm Canavarları Grid'e Ekle/Güncelle
+        for (const enemy of allEnemies) {
+            this.interestManager.updateVisibility(enemy, allEntitiesMap);
+        }
+
         for (const player of allPlayers) {
-            // 1. Görüş Alanı (AOI) Güncellemesi (PRO Grid System)
+            // 2. Görüş Alanı (AOI) Güncellemesi (PRO Grid System)
             const { newVisible, newHidden } = this.interestManager.updateVisibility(player, allEntitiesMap);
 
             // 2. Yeni Girenlere JOIN Paketleri
@@ -61,16 +66,10 @@ export class TickLoop {
             }
 
             // 4. Sadece Görünür Oyuncuların Durumunu Gönder (STATE_UPDATE)
-            const neighbors = this.interestManager.getVisiblePlayers(player.id, allPlayersMap);
-            // Çevredeki düşmanları da alalım
-            const visibleEnemies = Array.from(allEnemiesMap.values()).filter(e => {
-                const dx = player.position.x - e.position.x;
-                const dz = player.position.z - e.position.z;
-                return (dx*dx + dz*dz) <= (NET_CONFIG.AOI_DISTANCE * NET_CONFIG.AOI_DISTANCE);
-            });
+            const visibleEntities = this.interestManager.getVisibleEntities(player.id, allEntitiesMap);
 
             const statePacket = BinaryCoder.encodePlayersDynamicList(
-                [...neighbors.map((p: Player) => p.toState()), ...visibleEnemies.map(e => e.toState())], 
+                visibleEntities.map(e => e.toState()),
                 player.toState(), // Kendi güncel verilerini de gönder
                 serverTime,
                 allPlayers.length
