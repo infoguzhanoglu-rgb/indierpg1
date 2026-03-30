@@ -1,4 +1,5 @@
 import { WebSocket } from 'ws';
+import { randomUUID } from 'node:crypto';
 import { PacketType, BinaryCoder } from '../../../shared/src/index.js';
 import { GameManager } from '../core/GameManager.js';
 import { Player } from '../entities/Player.js';
@@ -19,7 +20,7 @@ export function handleIncomingPacket(
 
         switch (data.type) {
             case PacketType.LOGIN_REQ:
-                const player = new Player(Math.random().toString(36).substr(2, 9), data.username, ws);
+                const player = new Player(randomUUID(), data.username, ws);
                 gameManager.addPlayer(player);
                 // ÖNEMLİ: Socket-ID eşleşmesini kaydet (Online sayısının doğru düşmesi için)
                 mapConnection(ws, player.id);
