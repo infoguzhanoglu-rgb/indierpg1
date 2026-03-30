@@ -9,6 +9,7 @@ import { SPAWN_CONFIG } from './SpawnManager.js'; // Spawn noktaları eklendi
 export class GameManager {
     private players: Map<string, Player> = new Map();
     private enemies: Map<string, BaseEnemy> = new Map();
+    private entitiesByNetId: Map<number, any> = new Map();
     private network: ServerNetwork;
     private interestManager: InterestManager = new InterestManager();
     private startTime: number = Date.now();
@@ -110,6 +111,7 @@ export class GameManager {
         };
 
         this.enemies.set(id, saman);
+        this.entitiesByNetId.set(saman.netId, saman);
         console.log(`[GameManager] Saman Spawn Edildi: ${id} (NetID: ${saman.netId})`);
     }
 
@@ -141,6 +143,7 @@ export class GameManager {
                         // Haritadan sil (LEAVE gönder)
                         const leavePacket = BinaryCoder.encodeLeave(enemy.id);
                         this.network.broadcast(leavePacket);
+                        this.entitiesByNetId.delete(enemy.netId);
                         this.enemies.delete(id);
                         continue; 
                     }
@@ -203,20 +206,13 @@ export class GameManager {
      * PRO: NetID üzerinden Player veya Enemy bul
      */
     public getEntityByNetId(netId: number): any {
-        // Önce oyunculara bak
-        for (const p of this.players.values()) {
-            if (p.netId === netId) return p;
-        }
-        // Sonra düşmanlara bak
-        for (const e of this.enemies.values()) {
-            if (e.netId === netId) return e;
-        }
-        return null;
+        return this.entitiesByNetId.get(netId) || null;
     }
 
     public addPlayer(player: Player) {
         player.netId = this.nextNetId++; // PRO: Numeric ID atandı
         this.players.set(player.id, player);
+        this.entitiesByNetId.set(player.netId, player);
         const serverTime = this.getElapsedServerTime();
         
         // İlk girişte mevcut düşmanları VE diğer oyuncuları gönder
@@ -246,6 +242,7 @@ export class GameManager {
     public removePlayer(id: string) {
         const player = this.players.get(id);
         if (player) {
+            this.entitiesByNetId.delete(player.netId);
             this.players.delete(id);
             this.interestManager.removePlayer(id);
             const leavePacket = BinaryCoder.encodeLeave(id);
