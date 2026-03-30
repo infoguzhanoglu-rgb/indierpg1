@@ -50,7 +50,14 @@ export class DamageMeterUI {
             const content = document.createElement('div');
             content.className = 'dm-content';
             
-            content.innerHTML = `<span>${index+1}. ${entry.username}</span> <span>${this.formatNumber(entry.amount)}</span>`;
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = `${index + 1}. ${entry.username}`;
+
+            const amountSpan = document.createElement('span');
+            amountSpan.textContent = this.formatNumber(entry.amount);
+
+            content.appendChild(nameSpan);
+            content.appendChild(amountSpan);
 
             row.appendChild(bar);
             row.appendChild(content);
