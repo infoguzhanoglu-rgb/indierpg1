@@ -29,9 +29,10 @@ export class ServerNetwork {
 
             ws.on('message', (message: Buffer) => {
                 // Ham veri (Buffer) PacketHandler dosyasına gönderilir (Binary uyumluluğu için)
+                const arrayBuffer = message.buffer.slice(message.byteOffset, message.byteOffset + message.byteLength);
                 handleIncomingPacket(
                     ws, 
-                    message, 
+                    arrayBuffer as ArrayBuffer,
                     this.gameManager,
                     (socket) => this.connections.get(socket),
                     (socket, id) => this.mapConnectionToId(socket, id)

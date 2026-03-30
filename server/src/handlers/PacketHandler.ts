@@ -52,7 +52,8 @@ export function handleIncomingPacket(
                 const pId = getPlayerId(ws);
                 if (pId) {
                     const p = gameManager.getPlayerById(pId);
-                    if (p && p.tryIncreaseAttribute(data.attrName)) {
+                    const allowedAttributes = ['str', 'int', 'dex', 'vit', 'luk'];
+                    if (p && allowedAttributes.includes(data.attrName) && p.tryIncreaseAttribute(data.attrName)) {
                         p.send(BinaryCoder.encodeFullStats(p.attributes, p.derived, p.hp, p.mp));
                         const updatePacket = BinaryCoder.encodePlayersList(PacketType.JOIN, [p.toState()]);
                         gameManager.broadcastChat(updatePacket);
